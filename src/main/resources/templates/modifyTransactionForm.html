@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Add new transaction</title>
+</head>
+<body>
+<div>
+    <section layout:fragment="content">
+        <h2>MODIFY TRANSACTION</h2>
+        <form action="#" th:action="@{/updateTransactionById}" method="post" th:object="${transaction}">
+            <div class="form-group col-md-4">
+                <label for="inputType">Type</label>
+                <select id="inputType" th:field="*{type}" class="form-control">
+                    <option value="INCOME">INCOME</option>
+                    <option value="EXPENSE">EXPENSE</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputDescription">DESCRIPTION</label>
+                <textarea th:field="*{description}" class="form-control" id="inputDescription" rows="4" placeholder="Enter a description of the transaction"></textarea>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAmount">AMOUNT</label>
+                <input type="number" th:field="*{amount}" step="0.1" class="form-control" id="inputAmount" placeholder="Enter amount">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputData">DATE</label>
+                <input type="date" th:field="*{date}" class="form-control" id="inputData" placeholder="Enter date">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary" id="submit">Modify</button>
+            </div>
+        </form>
+    </section>
+</div>
+</body>
+</html>
