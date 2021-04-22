@@ -12,10 +12,4 @@ public class HomeController {
     public String getHome() {
         return "home";
     }
-
-    @GetMapping("/newTransaction")
-    public String createNewTransaction(Model model) {
-        model.addAttribute("newTransaction", new Transaction());
-        return "newTransactionForm";
-    }
 }

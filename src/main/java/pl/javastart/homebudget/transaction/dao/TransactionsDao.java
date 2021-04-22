@@ -1,6 +1,8 @@
-package pl.javastart.homebudget.transaction.data;
+package pl.javastart.homebudget.transaction.dao;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import pl.javastart.homebudget.transaction.model.Transaction;
 import pl.javastart.homebudget.transaction.model.Type;
@@ -8,18 +10,19 @@ import pl.javastart.homebudget.transaction.model.Type;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public class TransactionsRepository {
+@Component
+public class TransactionsDao {
     private final Connection connection;
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-    @Value("${spring.datasource.username}")
-    private String userName;
-    @Value("${spring.datasource.password}")
-    private String password;
+    //@Value("${javastart.db.url}")
+    //private String url;
+    //@Value("${javastart.db.username}")
+    //private String userName;
+    //@Value("${javastart.db.password}")
+    //private String password;
 
-    public TransactionsRepository() {
+    public TransactionsDao() {
         try {
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/home_budget?useSSL=false", "root", "root");
         } catch (SQLException exception) {
@@ -107,6 +110,25 @@ public class TransactionsRepository {
             exception.printStackTrace();
         }
         return allTransactions;
+    }
+
+    public Optional<Transaction> getById(int requestId) {
+        final String sqlQuery = "SELECT id, type, description, amount, data FROM transaction WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, requestId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Type type = Type.valueOf(resultSet.getString("type"));
+                String description = resultSet.getString("description");
+                double amount = resultSet.getDouble("amount");
+                Date data = resultSet.getDate("data");
+                return Optional.of(new Transaction(id, type, description, amount, data));
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return Optional.empty();
     }
 
     void close() {

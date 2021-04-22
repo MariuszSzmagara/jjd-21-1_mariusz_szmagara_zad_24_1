@@ -3,10 +3,10 @@ package pl.javastart.homebudget.transaction.model;
 public enum Type {
     INCOME("przychód"),
     EXPENSE("wydatek");
-    private final String description;
+    private final String translationPl;
 
-    Type(String description) {
-        this.description = description;
+    Type(String translationPl) {
+        this.translationPl = translationPl;
     }
 
 }
