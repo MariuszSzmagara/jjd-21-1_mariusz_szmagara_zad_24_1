@@ -1,9 +1,6 @@
 package pl.javastart.homebudget.transaction.dao;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import pl.javastart.homebudget.transaction.model.Transaction;
 import pl.javastart.homebudget.transaction.model.Type;
 
@@ -15,12 +12,6 @@ import java.util.Optional;
 @Component
 public class TransactionsDao {
     private final Connection connection;
-    //@Value("${javastart.db.url}")
-    //private String url;
-    //@Value("${javastart.db.username}")
-    //private String userName;
-    //@Value("${javastart.db.password}")
-    //private String password;
 
     public TransactionsDao() {
         try {

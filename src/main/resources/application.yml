@@ -1,5 +1,0 @@
-javastart.
- db.
-  url=jdbc:mysql://localhost:3306/home_budget?useSSL=false
-  username=root
-  password=root
