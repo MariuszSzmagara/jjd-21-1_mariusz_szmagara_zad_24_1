@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+  <title>Choose transaction to modify</title>
+</head>
+<body>
+<div>
+  <section layout:fragment="content">
+    <h2>CHOOSE TRANSACTION TO MODIFY</h2>
+    <div>
+      <ul>
+        <li th:each="transaction: ${allTransactionsList}">
+          <span th:text="|Id: ${transaction.id}; Type: ${transaction.type}; Description: ${transaction.description};
+    Amount: ${transaction.amount}; Date: ${transaction.date}|"></span>
+          <a th:href="|/modifyTransactionById?id=${transaction.id}|">Modify</a>
+          <a th:href="|/deleteTransactionById?id=${transaction.id}|">Delete</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</div>
+</body>
+</html>

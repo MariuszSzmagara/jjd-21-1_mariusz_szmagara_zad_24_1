@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+    <title>Choose transaction to modify</title>
+</head>
+<body>
+<div>
+    <section layout:fragment="content">
+        <h2>CHOOSE TRANSACTIONS TYPE</h2>
+        <div>
+            <a th:href="@{transactionsListByType(type=INCOME)}">Income list</a>
+        </div>
+        <div>
+            <a th:href="@{transactionsListByType(type=EXPENSE)}">Expenses list</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>
